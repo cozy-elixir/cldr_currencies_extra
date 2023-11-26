@@ -1,6 +1,20 @@
 defmodule Cldr.Currency.Extra do
   @moduledoc """
   Extra utils for `Cldr.Currency`.
+
+  ## References
+
+  ### ISO 3166
+
+    * [ISO 3166 from WIKIPEDIA](https://en.wikipedia.org/wiki/ISO_3166):
+      * [ISO 3166-1](https://en.wikipedia.org/wiki/ISO_3166-1)
+      * [ISO 3166-2](https://en.wikipedia.org/wiki/ISO_3166-2)
+      * [ISO 3166-3](https://en.wikipedia.org/wiki/ISO_3166-3)
+
+  ### ISO 4217
+
+    * [ISO 4217 from WIKIPEDIA](https://en.wikipedia.org/wiki/ISO_4217)
+
   """
 
   alias __MODULE__.TerritoryCode

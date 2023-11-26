@@ -1,4 +1,6 @@
 defmodule Cldr.Currency.Extra.TerritoryCode do
+  @moduledoc false
+
   alias Cldr.UnknownTerritoryError
 
   @no_territory :NO_TERRITORY

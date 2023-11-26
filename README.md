@@ -1,21 +1,25 @@
-# Cldr
+# Cldr Currencies Extra
 
-**TODO: Add description**
+[![Hex.pm](https://img.shields.io/hexpm/v/<name>.svg)](https://hex.pm/packages/ex_cldr_currencies_extra)
+
+> Extra utils for `Cldr.Currency`.
 
 ## Installation
 
-If [available in Hex](https://hex.pm/docs/publish), the package can be installed
-by adding `ex_cldr_currencies_extra` to your list of dependencies in `mix.exs`:
+Add `ex_cldr_currencies_extra` to the list of dependencies in `mix.exs`:
 
 ```elixir
 def deps do
   [
-    {:ex_cldr_currencies_extra, "~> 0.1.0"}
+    {ex_cldr_currencies_extra, "~> <version>"}
   ]
 end
 ```
 
-Documentation can be generated with [ExDoc](https://github.com/elixir-lang/ex_doc)
-and published on [HexDocs](https://hexdocs.pm). Once published, the docs can
-be found at <https://hexdocs.pm/ex_cldr_currencies_extra>.
+## Usage
 
+For more information, see the [documentation](https://hexdocs.pm/ex_cldr_currencies_extra).
+
+## License
+
+Apache License 2.0
