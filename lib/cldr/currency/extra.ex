@@ -372,23 +372,23 @@ defmodule Cldr.Currency.Extra do
     :XXX
   ]
 
-  @currency_codes_international [
-                                  @currency_codes_legal_tender,
-                                  @currency_codes_legal_tender_extra,
-                                  @currency_codes_legal_tender_to_be_deprecated,
-                                  @currency_codes_metal,
-                                  @currency_codes_imf
-                                ]
-                                |> Enum.concat()
-                                |> Enum.sort()
+  @currency_codes_circulating [
+                                @currency_codes_legal_tender,
+                                @currency_codes_legal_tender_extra,
+                                @currency_codes_legal_tender_to_be_deprecated,
+                                @currency_codes_metal,
+                                @currency_codes_imf
+                              ]
+                              |> Enum.concat()
+                              |> Enum.sort()
 
-  @currency_codes_international_paper_money [
-                                              @currency_codes_legal_tender,
-                                              @currency_codes_legal_tender_extra,
-                                              @currency_codes_legal_tender_to_be_deprecated
-                                            ]
-                                            |> Enum.concat()
-                                            |> Enum.sort()
+  @currency_codes_circulating_legal_tender [
+                                             @currency_codes_legal_tender,
+                                             @currency_codes_legal_tender_extra,
+                                             @currency_codes_legal_tender_to_be_deprecated
+                                           ]
+                                           |> Enum.concat()
+                                           |> Enum.sort()
 
   @type currency_group ::
           :legal_tender
@@ -461,8 +461,8 @@ defmodule Cldr.Currency.Extra do
   def currency_codes(:imf_deprecated), do: @currency_codes_imf_deprecated
   def currency_codes(:testing), do: @currency_codes_testing
   def currency_codes(:misc), do: @currency_codes_misc
-  def currency_codes(:international), do: @currency_codes_international
-  def currency_codes(:international_paper_money), do: @currency_codes_international_paper_money
+  def currency_codes(:circulating), do: @currency_codes_circulating
+  def currency_codes(:circulating_legal_tender), do: @currency_codes_circulating_legal_tender
 
   def currency_codes(currency_group),
     do: raise(ArgumentError, "unknown currency group - #{inspect(currency_group)}")

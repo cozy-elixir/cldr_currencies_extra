@@ -19,8 +19,8 @@ defmodule Cldr.Currency.ExtraTest do
       assert CurrencyExtra.currency_codes(:imf_deprecated) |> Enum.count() == 1
       assert CurrencyExtra.currency_codes(:testing) |> Enum.count() == 1
       assert CurrencyExtra.currency_codes(:misc) |> Enum.count() == 1
-      assert CurrencyExtra.currency_codes(:international) |> Enum.count() == 165
-      assert CurrencyExtra.currency_codes(:international_paper_money) |> Enum.count() == 160
+      assert CurrencyExtra.currency_codes(:circulating) |> Enum.count() == 165
+      assert CurrencyExtra.currency_codes(:circulating_legal_tender) |> Enum.count() == 160
     end
 
     test "raises an error when the unknown group is given" do
