@@ -2,6 +2,12 @@ defmodule Cldr.Currency.Extra do
   @moduledoc """
   Extra utils for `Cldr.Currency`.
 
+  > #### Note {: .info}
+  >
+  > Strictly speaking, this package doesn't based on CLDR.
+  > However, it addresses issues related to `Cldr.Currency`, so it uses the relevant naming
+  > convention. If CLDR provides the related data one day, there will be no need to rename.
+
   ## References
 
   ### ISO 3166

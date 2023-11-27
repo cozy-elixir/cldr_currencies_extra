@@ -11,7 +11,7 @@ Add `ex_cldr_currencies_extra` to the list of dependencies in `mix.exs`:
 ```elixir
 def deps do
   [
-    {ex_cldr_currencies_extra, "~> <version>"}
+    {:ex_cldr_currencies_extra, <requirement>}
   ]
 end
 ```
