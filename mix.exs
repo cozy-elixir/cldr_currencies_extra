@@ -1,4 +1,4 @@
-defmodule Cldr.MixProject do
+defmodule Cldr.Currencies.Extra.MixProject do
   use Mix.Project
 
   @version "0.2.0"
@@ -32,8 +32,8 @@ defmodule Cldr.MixProject do
   defp deps do
     [
       {:ex_cldr, "~> 2.0"},
-      {:jason, "~> 1.0", only: [:dev, :test]},
       {:ex_cldr_currencies, "~> 2.0"},
+      {:jason, "~> 1.0", only: [:dev, :test]},
       {:ex_doc, "~> 0.30", only: :dev, runtime: false}
     ]
   end
