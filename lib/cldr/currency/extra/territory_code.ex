@@ -3,7 +3,7 @@ defmodule Cldr.Currency.Extra.TerritoryCode do
 
   alias Cldr.UnknownTerritoryError
 
-  @no_territory :NO_TERRITORY
+  @no_territory nil
 
   @territory_codes_main %{
     ADP: :AD,
@@ -370,11 +370,11 @@ defmodule Cldr.Currency.Extra.TerritoryCode do
            Map.get(@territory_codes_all, currency_code) do
       territory_code
     else
+      {:error, {Cldr.UnknownCurrencyError = error, message}} ->
+        raise error, message
+
       @no_territory ->
         raise UnknownTerritoryError, "The currency #{inspect(currency_code)} has no territory"
-
-      {:error, {error, message}} when error in [Cldr.UnknownCurrencyError] ->
-        raise error, message
     end
   end
 end
