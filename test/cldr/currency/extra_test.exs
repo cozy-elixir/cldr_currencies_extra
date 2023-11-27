@@ -8,10 +8,10 @@ defmodule Cldr.Currency.ExtraTest do
 
   describe "currency_code/1" do
     test "returns currency codes as expected" do
-      assert CurrencyExtra.currency_codes(:legal_tender) |> Enum.count() == 154
-      assert CurrencyExtra.currency_codes(:legal_tender_extra) |> Enum.count() == 3
-      assert CurrencyExtra.currency_codes(:legal_tender_to_be_deprecated) |> Enum.count() == 5
-      assert CurrencyExtra.currency_codes(:legal_tender_deprecated) |> Enum.count() == 121
+      assert CurrencyExtra.currency_codes(:circulating) |> Enum.count() == 155
+      assert CurrencyExtra.currency_codes(:circulating_extra) |> Enum.count() == 3
+      assert CurrencyExtra.currency_codes(:circulating_to_be_deprecated) |> Enum.count() == 2
+      assert CurrencyExtra.currency_codes(:circulating_deprecated) |> Enum.count() == 123
       assert CurrencyExtra.currency_codes(:non_legal_tender) |> Enum.count() == 11
       assert CurrencyExtra.currency_codes(:metal) |> Enum.count() == 4
       assert CurrencyExtra.currency_codes(:imf) |> Enum.count() == 1
@@ -19,8 +19,8 @@ defmodule Cldr.Currency.ExtraTest do
       assert CurrencyExtra.currency_codes(:imf_deprecated) |> Enum.count() == 1
       assert CurrencyExtra.currency_codes(:testing) |> Enum.count() == 1
       assert CurrencyExtra.currency_codes(:misc) |> Enum.count() == 1
-      assert CurrencyExtra.currency_codes(:international) |> Enum.count() == 167
-      assert CurrencyExtra.currency_codes(:international_paper_money) |> Enum.count() == 162
+      assert CurrencyExtra.currency_codes(:international) |> Enum.count() == 165
+      assert CurrencyExtra.currency_codes(:international_paper_money) |> Enum.count() == 160
     end
 
     test "raises an error when the unknown group is given" do
