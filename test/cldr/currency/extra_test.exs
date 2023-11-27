@@ -45,4 +45,22 @@ defmodule Cldr.Currency.ExtraTest do
                CurrencyExtra.territory_code_for_code(:XXX)
     end
   end
+
+  describe "territory_code_for_code!/0" do
+    test "returns a territory code" do
+      assert :US = CurrencyExtra.territory_code_for_code!(:USD)
+    end
+
+    test "raises an error when the given currency code is invalid" do
+      assert_raise Cldr.UnknownCurrencyError, "The currency :UNKNOWN is invalid", fn ->
+        CurrencyExtra.territory_code_for_code!(:UNKNOWN)
+      end
+    end
+
+    test "raises an error when the given currency code has no territory code" do
+      assert_raise Cldr.UnknownTerritoryError, "The currency :XXX has no territory", fn ->
+        CurrencyExtra.territory_code_for_code!(:XXX)
+      end
+    end
+  end
 end
