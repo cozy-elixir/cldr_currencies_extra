@@ -1,6 +1,6 @@
 # Cldr Currencies Extra
 
-[![Hex.pm](https://img.shields.io/hexpm/v/<name>.svg)](https://hex.pm/packages/ex_cldr_currencies_extra)
+[![Hex.pm](https://img.shields.io/hexpm/v/ex_cldr_currencies_extra.svg)](https://hex.pm/packages/ex_cldr_currencies_extra)
 
 > Extra utils for `Cldr.Currency`.
 
