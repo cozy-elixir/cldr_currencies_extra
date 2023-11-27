@@ -474,7 +474,7 @@ defmodule Cldr.Currency.Extra do
     do: TerritoryCode.fetch_territory_code(currency_code)
 
   @doc """
-  Fetchs a territory code corresponding to a given currency code.
+  Fetches a territory code corresponding to a given currency code.
   """
   @spec territory_code_for_code!(currency_code()) :: territory_code()
   def territory_code_for_code!(currency_code),
