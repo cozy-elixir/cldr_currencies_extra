@@ -29,7 +29,7 @@ defmodule Cldr.Currency.Extra do
 
   alias __MODULE__.TerritoryCode
 
-  @currency_codes_circulating [
+  @currency_codes_legal_tender [
     :AED,
     :AFN,
     :ALL,
@@ -188,19 +188,19 @@ defmodule Cldr.Currency.Extra do
   ]
 
   # these currency codes are not included in CLDR
-  @currency_codes_circulating_extra [
+  @currency_codes_legal_tender_extra [
     :GGP,
     :IMP,
     :JEP
   ]
 
   # these currency codes are deprecated but still used
-  @currency_codes_circulating_to_be_deprecated [
+  @currency_codes_legal_tender_to_be_deprecated [
     :HRK,
     :SLL
   ]
 
-  @currency_codes_circulating_deprecated [
+  @currency_codes_legal_tender_deprecated [
     :ADP,
     :AFA,
     :ALK,
@@ -373,9 +373,9 @@ defmodule Cldr.Currency.Extra do
   ]
 
   @currency_codes_international [
-                                  @currency_codes_circulating,
-                                  @currency_codes_circulating_extra,
-                                  @currency_codes_circulating_to_be_deprecated,
+                                  @currency_codes_legal_tender,
+                                  @currency_codes_legal_tender_extra,
+                                  @currency_codes_legal_tender_to_be_deprecated,
                                   @currency_codes_metal,
                                   @currency_codes_imf
                                 ]
@@ -383,18 +383,18 @@ defmodule Cldr.Currency.Extra do
                                 |> Enum.sort()
 
   @currency_codes_international_paper_money [
-                                              @currency_codes_circulating,
-                                              @currency_codes_circulating_extra,
-                                              @currency_codes_circulating_to_be_deprecated
+                                              @currency_codes_legal_tender,
+                                              @currency_codes_legal_tender_extra,
+                                              @currency_codes_legal_tender_to_be_deprecated
                                             ]
                                             |> Enum.concat()
                                             |> Enum.sort()
 
   @type currency_group ::
-          :circulating
-          | :circulating_extra
-          | :circulating_to_be_deprecated
-          | :circulating_deprecated
+          :legal_tender
+          | :legal_tender_extra
+          | :legal_tender_to_be_deprecated
+          | :legal_tender_deprecated
           | :non_legal_tender
           | :metal
           | :imf
@@ -412,9 +412,9 @@ defmodule Cldr.Currency.Extra do
   @doc false
   def cldr_currency_codes() do
     []
-    |> Kernel.++(@currency_codes_circulating)
-    |> Kernel.++(@currency_codes_circulating_to_be_deprecated)
-    |> Kernel.++(@currency_codes_circulating_deprecated)
+    |> Kernel.++(@currency_codes_legal_tender)
+    |> Kernel.++(@currency_codes_legal_tender_to_be_deprecated)
+    |> Kernel.++(@currency_codes_legal_tender_deprecated)
     |> Kernel.++(@currency_codes_non_legal_tender)
     |> Kernel.++(@currency_codes_metal)
     |> Kernel.++(@currency_codes_imf)
@@ -429,10 +429,10 @@ defmodule Cldr.Currency.Extra do
   @doc false
   def all_currency_codes() do
     []
-    |> Kernel.++(@currency_codes_circulating)
-    |> Kernel.++(@currency_codes_circulating_extra)
-    |> Kernel.++(@currency_codes_circulating_to_be_deprecated)
-    |> Kernel.++(@currency_codes_circulating_deprecated)
+    |> Kernel.++(@currency_codes_legal_tender)
+    |> Kernel.++(@currency_codes_legal_tender_extra)
+    |> Kernel.++(@currency_codes_legal_tender_to_be_deprecated)
+    |> Kernel.++(@currency_codes_legal_tender_deprecated)
     |> Kernel.++(@currency_codes_non_legal_tender)
     |> Kernel.++(@currency_codes_metal)
     |> Kernel.++(@currency_codes_imf)
@@ -447,13 +447,13 @@ defmodule Cldr.Currency.Extra do
   Returns a list of currency codes belong to a group.
   """
   @spec currency_codes(currency_group()) :: [currency_code()]
-  def currency_codes(:circulating), do: @currency_codes_circulating
-  def currency_codes(:circulating_extra), do: @currency_codes_circulating_extra
+  def currency_codes(:legal_tender), do: @currency_codes_legal_tender
+  def currency_codes(:legal_tender_extra), do: @currency_codes_legal_tender_extra
 
-  def currency_codes(:circulating_to_be_deprecated),
-    do: @currency_codes_circulating_to_be_deprecated
+  def currency_codes(:legal_tender_to_be_deprecated),
+    do: @currency_codes_legal_tender_to_be_deprecated
 
-  def currency_codes(:circulating_deprecated), do: @currency_codes_circulating_deprecated
+  def currency_codes(:legal_tender_deprecated), do: @currency_codes_legal_tender_deprecated
   def currency_codes(:non_legal_tender), do: @currency_codes_non_legal_tender
   def currency_codes(:metal), do: @currency_codes_metal
   def currency_codes(:imf), do: @currency_codes_imf
