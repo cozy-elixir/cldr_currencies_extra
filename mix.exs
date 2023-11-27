@@ -34,7 +34,11 @@ defmodule Cldr.Currencies.Extra.MixProject do
       {:ex_cldr, "~> 2.0"},
       {:ex_cldr_currencies, "~> 2.0"},
       {:jason, "~> 1.0", only: [:dev, :test]},
-      {:ex_doc, "~> 0.30", only: :dev, runtime: false}
+      {:ex_doc, "~> 0.30", only: :dev, runtime: false},
+      {:ex_check, "~> 0.15.0", only: [:dev], runtime: false},
+      {:credo, ">= 0.0.0", only: [:dev], runtime: false},
+      {:dialyxir, ">= 0.0.0", only: [:dev], runtime: false},
+      {:mix_audit, ">= 0.0.0", only: [:dev], runtime: false}
     ]
   end
 

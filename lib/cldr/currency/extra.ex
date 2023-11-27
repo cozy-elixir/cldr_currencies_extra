@@ -4,7 +4,7 @@ defmodule Cldr.Currency.Extra do
 
   > #### Note {: .info}
   >
-  > Strictly speaking, this package doesn't based on CLDR.
+  > Strictly speaking, this package doesn't rely on data provided by CLDR.
   > However, it addresses issues related to `Cldr.Currency`, so it uses the relevant naming
   > convention. If CLDR provides the related data one day, there will be no need to rename.
 
@@ -389,6 +389,7 @@ defmodule Cldr.Currency.Extra do
   @type currency_group ::
           :legal_tender
           | :legal_tender_extra
+          | :legal_tender_to_be_deprecated
           | :legal_tender_deprecated
           | :non_legal_tender
           | :metal
@@ -398,6 +399,7 @@ defmodule Cldr.Currency.Extra do
           | :testing
           | :misc
           | :international
+          | :international_paper_money
   @type currency_code :: Cldr.Currency.code()
   @type territory_code :: Cldr.Currency.territory()
   @type message :: String.t()

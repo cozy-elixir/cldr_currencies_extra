@@ -350,28 +350,29 @@ defmodule Cldr.Currency.Extra.TerritoryCode do
   end
 
   def fetch_territory_code(currency_code) when is_atom(currency_code) do
-    with {:ok, currency_code} <- Cldr.validate_currency(currency_code) do
-      case Map.get(@territory_codes_all, currency_code) do
-        @no_territory ->
-          {:error,
-           {UnknownTerritoryError, "The currency #{inspect(currency_code)} has no territory"}}
+    with {:ok, currency_code} <- Cldr.validate_currency(currency_code),
+         territory_code when territory_code != @no_territory <-
+           Map.get(@territory_codes_all, currency_code) do
+      {:ok, territory_code}
+    else
+      @no_territory ->
+        {:error,
+         {UnknownTerritoryError, "The currency #{inspect(currency_code)} has no territory"}}
 
-        territory_code ->
-          {:ok, territory_code}
-      end
+      other ->
+        other
     end
   end
 
   def fetch_territory_code!(currency_code) do
-    with {:ok, currency_code} <- Cldr.validate_currency(currency_code) do
-      case Map.get(@territory_codes_all, currency_code) do
-        @no_territory ->
-          raise UnknownTerritoryError, "The currency #{inspect(currency_code)} has no territory"
-
-        territory_code ->
-          territory_code
-      end
+    with {:ok, currency_code} <- Cldr.validate_currency(currency_code),
+         territory_code when territory_code != @no_territory <-
+           Map.get(@territory_codes_all, currency_code) do
+      territory_code
     else
+      @no_territory ->
+        raise UnknownTerritoryError, "The currency #{inspect(currency_code)} has no territory"
+
       {:error, {error, message}} when error in [Cldr.UnknownCurrencyError] ->
         raise error, message
     end
