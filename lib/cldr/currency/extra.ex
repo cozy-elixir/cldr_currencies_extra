@@ -19,7 +19,7 @@ defmodule Cldr.Currency.Extra do
 
   alias __MODULE__.TerritoryCode
 
-  @currency_codes [
+  @currency_codes_legal_tender [
     :AED,
     :AFN,
     :ALL,
@@ -39,7 +39,6 @@ defmodule Cldr.Currency.Extra do
     :BMD,
     :BND,
     :BOB,
-    :BOV,
     :BRL,
     :BSD,
     :BTN,
@@ -48,16 +47,14 @@ defmodule Cldr.Currency.Extra do
     :BZD,
     :CAD,
     :CDF,
-    :CHE,
     :CHF,
-    :CHW,
     :CLF,
     :CLP,
     :CNH,
     :CNY,
     :COP,
-    :COU,
     :CRC,
+    :CUC,
     :CUP,
     :CVE,
     :CZK,
@@ -119,7 +116,6 @@ defmodule Cldr.Currency.Extra do
     :MVR,
     :MWK,
     :MXN,
-    :MXV,
     :MYR,
     :MZN,
     :NAD,
@@ -149,7 +145,6 @@ defmodule Cldr.Currency.Extra do
     :SGD,
     :SHP,
     :SLE,
-    :SLL,
     :SOS,
     :SRD,
     :SSP,
@@ -169,12 +164,8 @@ defmodule Cldr.Currency.Extra do
     :UAH,
     :UGX,
     :USD,
-    :USN,
-    :UYI,
     :UYU,
-    :UYW,
     :UZS,
-    :VED,
     :VES,
     :VND,
     :VUV,
@@ -188,7 +179,14 @@ defmodule Cldr.Currency.Extra do
     :ZMW
   ]
 
-  @historical_currency_codes [
+  # these currency codes are not included in CLDR
+  @currency_codes_legal_tender_extra [
+    :GGP,
+    :IMP,
+    :JEP
+  ]
+
+  @currency_codes_legal_tender_deprecated [
     :ADP,
     :AFA,
     :ALK,
@@ -224,7 +222,6 @@ defmodule Cldr.Currency.Extra do
     :CNX,
     :CSD,
     :CSK,
-    :CUC,
     :CYP,
     :DDM,
     :DEM,
@@ -285,6 +282,7 @@ defmodule Cldr.Currency.Extra do
     :SDP,
     :SIT,
     :SKK,
+    :SLL,
     :SRG,
     :STD,
     :SUR,
@@ -316,51 +314,89 @@ defmodule Cldr.Currency.Extra do
     :ZWR
   ]
 
-  # IMF - International Monetary Fund
-  @imf_currency_codes [
-    :XBA,
-    :XBB,
-    :XBC,
-    :XBD,
-    :XDR,
-    :XSU,
-    :XUA
+  @currency_codes_non_legal_tender [
+    :BOV,
+    :CHE,
+    :CHW,
+    :COU,
+    :MXV,
+    :USN,
+    :UYI,
+    :UYW,
+    :VED
   ]
 
-  @historical_imf_currency_codes [
-    :XRE
-  ]
-
-  @precious_metal_codes [
-    :XAU,
+  @currency_codes_metal [
     :XAG,
+    :XAU,
     :XPD,
     :XPT
   ]
 
-  @testing_currency_codes [
+  @currency_codes_imf [
+    :XDR
+  ]
+
+  @currency_codes_imf_internal [
+    :XBA,
+    :XBB,
+    :XBC,
+    :XBD,
+    :XSU,
+    :XUA
+  ]
+
+  @currency_codes_imf_deprecated [
+    :XRE
+  ]
+
+  @currency_codes_testing [
     :XTS
   ]
 
-  @misc_currency_codes [
+  @currency_codes_misc [
     :XXX
   ]
 
-  @extra_currency_codes [
-    :JEP
-  ]
+  @currency_codes_international [
+                                  @currency_codes_legal_tender,
+                                  @currency_codes_legal_tender_extra,
+                                  @currency_codes_metal,
+                                  @currency_codes_imf
+                                ]
+                                |> Enum.concat()
+                                |> Enum.sort()
+
+  @type currency_group ::
+          :legal_tender
+          | :legal_tender_extra
+          | :legal_tender_deprecated
+          | :non_legal_tender
+          | :metal
+          | :imf
+          | :imf_internal
+          | :imf_deprecated
+          | :testing
+          | :misc
+          | :international
+  @type currency_code :: Cldr.Currency.code()
+  @type territory_code :: Cldr.Currency.territory()
+  @type message :: String.t()
 
   # For testing
   @doc false
   def cldr_currency_codes() do
     []
-    |> Kernel.++(@currency_codes)
-    |> Kernel.++(@historical_currency_codes)
-    |> Kernel.++(@imf_currency_codes)
-    |> Kernel.++(@historical_imf_currency_codes)
-    |> Kernel.++(@precious_metal_codes)
-    |> Kernel.++(@testing_currency_codes)
-    |> Kernel.++(@misc_currency_codes)
+    |> Kernel.++(@currency_codes_legal_tender)
+    |> Kernel.++(@currency_codes_legal_tender_deprecated)
+    |> Kernel.++(@currency_codes_non_legal_tender)
+    |> Kernel.++(@currency_codes_metal)
+    |> Kernel.++(@currency_codes_imf)
+    |> Kernel.++(@currency_codes_imf_internal)
+    |> Kernel.++(@currency_codes_imf_deprecated)
+    |> Kernel.++(@currency_codes_testing)
+    |> Kernel.++(@currency_codes_misc)
+    |> Enum.uniq()
     |> Enum.sort()
   end
 
@@ -368,36 +404,53 @@ defmodule Cldr.Currency.Extra do
   @doc false
   def all_currency_codes() do
     []
-    |> Kernel.++(@currency_codes)
-    |> Kernel.++(@historical_currency_codes)
-    |> Kernel.++(@imf_currency_codes)
-    |> Kernel.++(@historical_imf_currency_codes)
-    |> Kernel.++(@precious_metal_codes)
-    |> Kernel.++(@testing_currency_codes)
-    |> Kernel.++(@misc_currency_codes)
-    |> Kernel.++(@extra_currency_codes)
+    |> Kernel.++(@currency_codes_legal_tender)
+    |> Kernel.++(@currency_codes_legal_tender_extra)
+    |> Kernel.++(@currency_codes_legal_tender_deprecated)
+    |> Kernel.++(@currency_codes_non_legal_tender)
+    |> Kernel.++(@currency_codes_metal)
+    |> Kernel.++(@currency_codes_imf)
+    |> Kernel.++(@currency_codes_imf_internal)
+    |> Kernel.++(@currency_codes_imf_deprecated)
+    |> Kernel.++(@currency_codes_testing)
+    |> Kernel.++(@currency_codes_misc)
+    |> Enum.uniq()
     |> Enum.sort()
   end
 
   @doc """
-  Returns currency codes belongs to a type.
+  Returns a list of currency codes belong to a group.
   """
-  def currency_codes(:in_circulation), do: @currency_codes
-  def currency_codes(:historical_in_circulation), do: @historical_currency_codes
-  def currency_codes(:imf), do: @imf_currency_codes
-  def currency_codes(:historical_imf), do: @historical_imf_currency_codes
-  def currency_codes(:precious_metal), do: @precious_metal_codes
-  def currency_codes(:testing), do: @testing_currency_codes
-  def currency_codes(:misc), do: @misc_currency_codes
-  def currency_codes(:extra), do: @extra_currency_codes
+  @spec currency_codes(currency_group()) :: [currency_code()]
+  def currency_codes(:legal_tender), do: @currency_codes_legal_tender
+  def currency_codes(:legal_tender_extra), do: @currency_codes_legal_tender_extra
+  def currency_codes(:legal_tender_deprecated), do: @currency_codes_legal_tender_deprecated
+  def currency_codes(:non_legal_tender), do: @currency_codes_non_legal_tender
+  def currency_codes(:metal), do: @currency_codes_metal
+  def currency_codes(:imf), do: @currency_codes_imf
+  def currency_codes(:imf_internal), do: @currency_codes_imf_internal
+  def currency_codes(:imf_deprecated), do: @currency_codes_imf_deprecated
+  def currency_codes(:testing), do: @currency_codes_testing
+  def currency_codes(:misc), do: @currency_codes_misc
+  def currency_codes(:international), do: @currency_codes_international
+
+  def currency_codes(currency_group),
+    do: raise(ArgumentError, "unknown currency group - #{inspect(currency_group)}")
 
   @doc """
-  Returns a territory code from a given currency code.
+  Fetches a territory code corresponding to a given currency code.
   """
-  def territory_code_for_code(code), do: TerritoryCode.fetch_territory_code(code)
+  @spec territory_code_for_code(currency_code()) ::
+          {:ok, territory_code()}
+          | {:error, {Cldr.UnknownCurrencyError, message()}}
+          | {:error, {Cldr.UnknownTerritoryError, message()}}
+  def territory_code_for_code(currency_code),
+    do: TerritoryCode.fetch_territory_code(currency_code)
 
   @doc """
-  Returns a territory code from a given currency code.
+  Fetchs a territory code corresponding to a given currency code.
   """
-  def territory_code_for_code!(code), do: TerritoryCode.fetch_territory_code!(code)
+  @spec territory_code_for_code!(currency_code()) :: territory_code()
+  def territory_code_for_code!(currency_code),
+    do: TerritoryCode.fetch_territory_code!(currency_code)
 end
