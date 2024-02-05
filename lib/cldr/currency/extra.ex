@@ -402,8 +402,8 @@ defmodule Cldr.Currency.Extra do
           | :imf_deprecated
           | :testing
           | :misc
-          | :international
-          | :international_paper_money
+          | :circulating
+          | :circulating_legal_tender
   @type currency_code :: Cldr.Currency.code()
   @type territory_code :: Cldr.Currency.territory()
   @type message :: String.t()
