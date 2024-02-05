@@ -1,7 +1,7 @@
 defmodule Cldr.Currencies.Extra.MixProject do
   use Mix.Project
 
-  @version "0.6.0"
+  @version "0.7.0"
   @description "Extra utils for Cldr.Currency."
   @source_url "https://github.com/cozy-elixir/cldr_currencies_extra"
 
