@@ -6,7 +6,7 @@ defmodule Cldr.Currency.ExtraTest do
     assert CurrencyExtra.cldr_currency_codes() == Cldr.Currency.known_currency_codes()
   end
 
-  describe "currency_code/1" do
+  describe "currency_codes/1" do
     test "returns currency codes as expected" do
       assert CurrencyExtra.currency_codes(:legal_tender) |> Enum.count() == 155
       assert CurrencyExtra.currency_codes(:legal_tender_extra) |> Enum.count() == 3
@@ -60,6 +60,28 @@ defmodule Cldr.Currency.ExtraTest do
     test "raises an error when the given currency code has no territory code" do
       assert_raise Cldr.UnknownTerritoryError, "The currency :XXX has no territory", fn ->
         CurrencyExtra.territory_code_for_code!(:XXX)
+      end
+    end
+  end
+
+  describe "symbol/1" do
+    test "returns a symbol" do
+      assert CurrencyExtra.symbol(:CNY) == {:ok, "¥"}
+    end
+
+    test "returns an error when the given currency code is invalid" do
+      assert {:error, {RuntimeError, "no symbol found"}} = CurrencyExtra.symbol(:CNF)
+    end
+  end
+
+  describe "symbol!/1" do
+    test "returns a symbol" do
+      assert CurrencyExtra.symbol!(:CNY) == "¥"
+    end
+
+    test "raises an error when the given currency code is invalid" do
+      assert_raise RuntimeError, "no symbol found", fn ->
+        CurrencyExtra.symbol!(:CNF)
       end
     end
   end
