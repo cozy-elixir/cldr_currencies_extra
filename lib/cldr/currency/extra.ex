@@ -30,7 +30,7 @@ defmodule Cldr.Currency.Extra do
   alias __MODULE__.TerritoryCode
 
   @currency_legal_tender %{
-    AED: %{symbol: "د.إ‎"},
+    AED: %{symbol: "د.إ"},
     AFN: %{symbol: "؋"},
     ALL: %{symbol: "L"},
     AMD: %{symbol: "֏"},
